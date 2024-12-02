@@ -100,3 +100,44 @@ lessonCards.forEach(card => {
     card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(card);
 });
+
+// Add intersection observer for section animations
+const sections = document.querySelectorAll('.lessons-section, .vocabulary-section, .practice-section');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1
+});
+
+sections.forEach(section => {
+    sectionObserver.observe(section);
+});
+
+// Add ripple effect to buttons
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        const x = e.clientX - e.target.offsetLeft;
+        const y = e.clientY - e.target.offsetTop;
+        
+        const ripple = document.createElement('span');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+    });
+});
+
+// Add hover sound effect to phrases (optional)
+const phrases = document.querySelectorAll('.phrase');
+phrases.forEach(phrase => {
+    phrase.addEventListener('mouseenter', () => {
+        // You can add a subtle hover sound here if desired
+    });
+});

@@ -34,11 +34,28 @@ nav {
     color: #FAF3E0;
     text-decoration: none;
     margin-left: 2rem;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #D4B08C;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 .nav-links a:hover {
     color: #D4B08C;
+    transform: translateY(-2px);
 }
 
 main {
@@ -54,12 +71,36 @@ main {
     border-radius: 10px;
     margin-bottom: 2rem;
     box-shadow: 0 2px 10px rgba(44, 24, 16, 0.1);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: #2C1810;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .hero p {
@@ -68,11 +109,20 @@ main {
 
 .lessons-section, .vocabulary-section, .practice-section {
     margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.lessons-section.visible, .vocabulary-section.visible, .practice-section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 h2 {
     color: #704214;
     margin-bottom: 1.5rem;
+    animation: slideIn 0.5s ease-out;
 }
 
 .lesson-cards {
@@ -87,12 +137,28 @@ h2 {
     border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 2px 5px rgba(44, 24, 16, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid #D4B08C;
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.lesson-cards .lesson-card:nth-child(1) { animation-delay: 0.1s; }
+.lesson-cards .lesson-card:nth-child(2) { animation-delay: 0.2s; }
+.lesson-cards .lesson-card:nth-child(3) { animation-delay: 0.3s; }
+.lesson-cards .lesson-card:nth-child(4) { animation-delay: 0.4s; }
+
 .lesson-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 4px 15px rgba(44, 24, 16, 0.15);
 }
 
@@ -107,12 +173,24 @@ h2 {
     background-color: #FAF3E0;
     border-radius: 5px;
     border: 1px solid #D4B08C;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.phrase:hover {
+    transform: translateX(5px);
+    background-color: #f5e6d3;
 }
 
 .hausa {
     font-weight: bold;
     color: #704214;
     margin-bottom: 0.3rem;
+    transition: all 0.3s ease;
+}
+
+.phrase:hover .hausa {
+    transform: scale(1.05);
 }
 
 .english {
@@ -132,13 +210,13 @@ h2 {
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.8s;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
     cursor: pointer;
 }
 
 .flashcard:hover .flashcard-inner {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) scale(1.05);
 }
 
 .flashcard-front, .flashcard-back {
@@ -169,13 +247,44 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
     background-color: #8B5E34;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(44, 24, 16, 0.2);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+button:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
 }
 
 footer {
@@ -204,4 +313,9 @@ footer {
     .hero h2 {
         font-size: 2rem;
     }
+}
+
+/* Add smooth scrolling to the whole page */
+html {
+    scroll-behavior: smooth;
 }
