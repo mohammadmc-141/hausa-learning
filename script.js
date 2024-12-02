@@ -103,6 +103,7 @@ lessonCards.forEach(card => {
 
 // Quiz functionality
 const quizQuestions = [
+    // Greetings
     {
         question: "How do you say 'Hello' in Hausa?",
         options: ["Sannu", "Na gode", "Yau", "Ruwa"],
@@ -114,19 +115,100 @@ const quizQuestions = [
         correct: 2
     },
     {
-        question: "How do you say 'water' in Hausa?",
-        options: ["Nama", "Ruwa", "Shinkafa", "Abinci"],
+        question: "How do you say 'Good evening' in Hausa?",
+        options: ["Ina kwana", "Barka da safe", "Barka da yamma", "Sai anjima"],
+        correct: 2
+    },
+    {
+        question: "What does 'Sai an jima' mean?",
+        options: ["Good night", "See you later", "How are you", "Thank you"],
         correct: 1
     },
+    {
+        question: "How do you say 'Good morning' in Hausa?",
+        options: ["Barka da yamma", "Sai anjima", "Ina kwana", "Barka da safe"],
+        correct: 3
+    },
+
+    // Numbers
     {
         question: "What is the Hausa word for 'five'?",
         options: ["Daya", "Biyu", "Uku", "Biyar"],
         correct: 3
     },
     {
-        question: "How do you say 'Good evening' in Hausa?",
-        options: ["Ina kwana", "Barka da safe", "Barka da yamma", "Sai anjima"],
+        question: "How do you say 'seven' in Hausa?",
+        options: ["Shida", "Bakwai", "Takwas", "Tara"],
+        correct: 1
+    },
+    {
+        question: "What number is 'Goma' in English?",
+        options: ["Eight", "Nine", "Ten", "Six"],
         correct: 2
+    },
+    {
+        question: "How do you say 'three' in Hausa?",
+        options: ["Uku", "Biyu", "Hudu", "Daya"],
+        correct: 0
+    },
+    {
+        question: "What is 'Takwas' in English?",
+        options: ["Six", "Seven", "Nine", "Eight"],
+        correct: 3
+    },
+
+    // Food and Drinks
+    {
+        question: "How do you say 'water' in Hausa?",
+        options: ["Nama", "Ruwa", "Shinkafa", "Abinci"],
+        correct: 1
+    },
+    {
+        question: "What does 'Abinci' mean?",
+        options: ["Water", "Bread", "Food", "Rice"],
+        correct: 2
+    },
+    {
+        question: "What is 'Nama' in English?",
+        options: ["Meat", "Fish", "Rice", "Beans"],
+        correct: 0
+    },
+    {
+        question: "How do you say 'bread' in Hausa?",
+        options: ["Shinkafa", "Kifi", "Wake", "Waina"],
+        correct: 3
+    },
+    {
+        question: "What does 'Madara' mean?",
+        options: ["Water", "Juice", "Tea", "Milk"],
+        correct: 3
+    },
+
+    // Time and Common Words
+    {
+        question: "How do you say 'today' in Hausa?",
+        options: ["Yau", "Gobe", "Jiya", "Kullum"],
+        correct: 0
+    },
+    {
+        question: "What does 'Gobe' mean?",
+        options: ["Yesterday", "Today", "Tomorrow", "Now"],
+        correct: 2
+    },
+    {
+        question: "How do you say 'I/Me' in Hausa?",
+        options: ["Kai", "Ni", "Shi", "Mu"],
+        correct: 1
+    },
+    {
+        question: "What does 'Mu' mean in English?",
+        options: ["You", "He", "She", "We"],
+        correct: 3
+    },
+    {
+        question: "How do you say 'she' in Hausa?",
+        options: ["Shi", "Ita", "Ni", "Kai"],
+        correct: 1
     }
 ];
 
