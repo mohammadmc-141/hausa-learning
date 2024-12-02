@@ -100,3 +100,137 @@ lessonCards.forEach(card => {
     card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(card);
 });
+
+// Quiz functionality
+const quizQuestions = [
+    {
+        question: "How do you say 'Hello' in Hausa?",
+        options: ["Sannu", "Na gode", "Yau", "Ruwa"],
+        correct: 0
+    },
+    {
+        question: "What does 'Na gode' mean?",
+        options: ["Good morning", "How are you?", "Thank you", "Goodbye"],
+        correct: 2
+    },
+    {
+        question: "How do you say 'water' in Hausa?",
+        options: ["Nama", "Ruwa", "Shinkafa", "Abinci"],
+        correct: 1
+    },
+    {
+        question: "What is the Hausa word for 'five'?",
+        options: ["Daya", "Biyu", "Uku", "Biyar"],
+        correct: 3
+    },
+    {
+        question: "How do you say 'Good evening' in Hausa?",
+        options: ["Ina kwana", "Barka da safe", "Barka da yamma", "Sai anjima"],
+        correct: 2
+    }
+];
+
+let currentQuestion = 0;
+const quizContainer = document.querySelector('.quiz-container');
+const questionDiv = document.getElementById('quiz-question');
+const optionsDiv = document.getElementById('quiz-options');
+const checkButton = document.getElementById('check-answer');
+const nextButton = document.getElementById('next-question');
+const feedbackDiv = document.getElementById('quiz-feedback');
+
+function displayQuestion(index) {
+    const question = quizQuestions[index];
+    questionDiv.innerHTML = `<h3>${question.question}</h3>`;
+    optionsDiv.innerHTML = '';
+    
+    question.options.forEach((option, i) => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.classList.add('quiz-option');
+        button.addEventListener('click', () => selectOption(i));
+        optionsDiv.appendChild(button);
+    });
+    
+    checkButton.style.display = 'block';
+    nextButton.style.display = 'none';
+    feedbackDiv.textContent = '';
+}
+
+function selectOption(index) {
+    const options = optionsDiv.querySelectorAll('.quiz-option');
+    options.forEach(option => option.classList.remove('selected'));
+    options[index].classList.add('selected');
+}
+
+checkButton.addEventListener('click', () => {
+    const selectedOption = optionsDiv.querySelector('.selected');
+    if (!selectedOption) {
+        feedbackDiv.textContent = 'Please select an answer!';
+        return;
+    }
+    
+    const selectedIndex = Array.from(optionsDiv.children).indexOf(selectedOption);
+    const correct = selectedIndex === quizQuestions[currentQuestion].correct;
+    
+    if (correct) {
+        feedbackDiv.textContent = 'Correct! Well done!';
+        feedbackDiv.style.color = '#2e7d32';
+    } else {
+        feedbackDiv.textContent = `Incorrect. The correct answer is: ${quizQuestions[currentQuestion].options[quizQuestions[currentQuestion].correct]}`;
+        feedbackDiv.style.color = '#c62828';
+    }
+    
+    checkButton.style.display = 'none';
+    nextButton.style.display = 'block';
+    nextButton.textContent = currentQuestion === quizQuestions.length - 1 ? 'Restart Quiz' : 'Next Question';
+});
+
+nextButton.addEventListener('click', () => {
+    if (nextButton.textContent === 'Start Quiz' || nextButton.textContent === 'Restart Quiz') {
+        currentQuestion = 0;
+    } else {
+        currentQuestion++;
+    }
+    
+    if (currentQuestion < quizQuestions.length) {
+        displayQuestion(currentQuestion);
+    }
+});
+
+// Add some CSS for quiz options
+const style = document.createElement('style');
+style.textContent = `
+    .quiz-option {
+        display: block;
+        width: 100%;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        text-align: left;
+        background-color: #fff;
+        border: 2px solid #8b4513;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .quiz-option:hover {
+        background-color: #f5e6d3;
+    }
+    
+    .quiz-option.selected {
+        background-color: #deb887;
+        color: #8b4513;
+        font-weight: bold;
+    }
+    
+    #quiz-question h3 {
+        color: #8b4513;
+        margin-bottom: 1.5rem;
+    }
+    
+    #quiz-feedback {
+        margin-top: 1rem;
+        font-weight: bold;
+    }
+`;
+document.head.appendChild(style);

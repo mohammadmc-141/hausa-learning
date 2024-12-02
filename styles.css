@@ -7,13 +7,13 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #5D4037;
-    background-color: #EFEBE9;
+    color: #4a2f1d;
+    background-color: #f5e6d3;
 }
 
 header {
-    background-color: #3E2723;
-    color: #D7CCC8;
+    background-color: #8b4513;
+    color: #fff;
     padding: 1rem 0;
     position: sticky;
     top: 0;
@@ -30,14 +30,14 @@ nav {
 }
 
 .nav-links a {
-    color: #D7CCC8;
+    color: #fff;
     text-decoration: none;
     margin-left: 2rem;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #BCAAA4;
+    color: #deb887;
 }
 
 main {
@@ -49,7 +49,7 @@ main {
 .hero {
     text-align: center;
     padding: 4rem 0;
-    background-color: #D7CCC8;
+    background-color: #deb887;
     border-radius: 10px;
     margin-bottom: 2rem;
 }
@@ -57,15 +57,13 @@ main {
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #3E2723;
-}
-
-.lessons-section, .vocabulary-section, .practice-section {
-    margin-bottom: 3rem;
+    color: #8b4513;
 }
 
 h2 {
-    color: #3E2723;
+    color: #8b4513;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .lesson-cards {
@@ -76,39 +74,43 @@ h2 {
 }
 
 .lesson-card {
-    background-color: #FFFFFF;
+    background-color: #fff;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 5px rgba(62, 39, 35, 0.2);
+    box-shadow: 0 4px 6px rgba(139, 69, 19, 0.1);
     transition: transform 0.3s;
-    border: 2px solid #8D6E63;
+    border: 2px solid #8b4513;
 }
 
 .lesson-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(139, 69, 19, 0.2);
 }
 
 .lesson-card h3 {
-    color: #4E342E;
+    color: #8b4513;
     margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.3em;
 }
 
 .phrase {
     margin: 1rem 0;
-    padding: 0.8rem;
-    background-color: #EFEBE9;
+    padding: 1rem;
+    background-color: #f5e6d3;
     border-radius: 5px;
-    border-left: 4px solid #8D6E63;
+    border-left: 4px solid #8b4513;
 }
 
 .hausa {
     font-weight: bold;
-    color: #4E342E;
+    color: #8b4513;
     font-size: 1.1em;
+    margin-bottom: 0.3rem;
 }
 
 .english {
-    color: #5D4037;
+    color: #6b4423;
     font-style: italic;
 }
 
@@ -141,37 +143,42 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #D7CCC8;
+    background-color: #deb887;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(62, 39, 35, 0.2);
-    border: 2px solid #8D6E63;
+    box-shadow: 0 4px 6px rgba(139, 69, 19, 0.1);
+    border: 2px solid #8b4513;
+    padding: 1rem;
 }
 
 .flashcard-back {
     transform: rotateY(180deg);
-    background-color: #BCAAA4;
+    background-color: #8b4513;
+    color: #fff;
 }
 
 button {
-    background-color: #5D4037;
-    color: #D7CCC8;
+    background-color: #8b4513;
+    color: #fff;
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    display: block;
+    margin: 2rem auto;
 }
 
 button:hover {
-    background-color: #4E342E;
+    background-color: #6b4423;
+    transform: translateY(-2px);
 }
 
 footer {
     text-align: center;
     padding: 2rem;
-    background-color: #3E2723;
-    color: #D7CCC8;
+    background-color: #8b4513;
+    color: #fff;
     margin-top: 3rem;
 }
 
