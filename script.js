@@ -1,5 +1,6 @@
 // Vocabulary data
 const vocabulary = [
+    // Greetings
     { hausa: 'Sannu', english: 'Hello' },
     { hausa: 'Na gode', english: 'Thank you' },
     { hausa: 'Yaya kake?', english: 'How are you? (to male)' },
@@ -9,7 +10,38 @@ const vocabulary = [
     { hausa: 'Barka da yamma', english: 'Good evening' },
     { hausa: 'Barka da safe', english: 'Good morning' },
     { hausa: 'Ina kwana', english: 'Good night' },
-    { hausa: 'Ruwa', english: 'Water' }
+    
+    // Numbers
+    { hausa: 'Daya', english: 'One' },
+    { hausa: 'Biyu', english: 'Two' },
+    { hausa: 'Uku', english: 'Three' },
+    { hausa: 'Hudu', english: 'Four' },
+    { hausa: 'Biyar', english: 'Five' },
+    { hausa: 'Shida', english: 'Six' },
+    { hausa: 'Bakwai', english: 'Seven' },
+    { hausa: 'Takwas', english: 'Eight' },
+    { hausa: 'Tara', english: 'Nine' },
+    { hausa: 'Goma', english: 'Ten' },
+    
+    // Food and Drinks
+    { hausa: 'Abinci', english: 'Food' },
+    { hausa: 'Ruwa', english: 'Water' },
+    { hausa: 'Shinkafa', english: 'Rice' },
+    { hausa: 'Nama', english: 'Meat' },
+    { hausa: 'Waina', english: 'Bread' },
+    { hausa: 'Madara', english: 'Milk' },
+    { hausa: 'Kifi', english: 'Fish' },
+    { hausa: 'Wake', english: 'Beans' },
+    
+    // Common Words
+    { hausa: 'Yau', english: 'Today' },
+    { hausa: 'Gobe', english: 'Tomorrow' },
+    { hausa: 'Jiya', english: 'Yesterday' },
+    { hausa: 'Kai/Ke', english: 'You' },
+    { hausa: 'Ni', english: 'I/Me' },
+    { hausa: 'Shi', english: 'He' },
+    { hausa: 'Ita', english: 'She' },
+    { hausa: 'Mu', english: 'We' }
 ];
 
 // Flashcard functionality
