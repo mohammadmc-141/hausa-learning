@@ -7,17 +7,18 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #3E2723;
-    background-color: #EFEBE9;
+    color: #2C1810;
+    background-color: #FAF3E0;
 }
 
 header {
-    background-color: #5D4037;
-    color: #EFEBE9;
+    background-color: #704214;
+    color: #FAF3E0;
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 2px 4px rgba(44, 24, 16, 0.1);
 }
 
 nav {
@@ -30,14 +31,14 @@ nav {
 }
 
 .nav-links a {
-    color: #D7CCC8;
+    color: #FAF3E0;
     text-decoration: none;
     margin-left: 2rem;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #BCAAA4;
+    color: #D4B08C;
 }
 
 main {
@@ -49,20 +50,20 @@ main {
 .hero {
     text-align: center;
     padding: 4rem 0;
-    background-color: #D7CCC8;
+    background-color: #D4B08C;
     border-radius: 10px;
     margin-bottom: 2rem;
-    box-shadow: 0 2px 10px rgba(93, 64, 55, 0.1);
+    box-shadow: 0 2px 10px rgba(44, 24, 16, 0.1);
 }
 
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #4E342E;
+    color: #2C1810;
 }
 
 .hero p {
-    color: #3E2723;
+    color: #4A2511;
 }
 
 .lessons-section, .vocabulary-section, .practice-section {
@@ -70,7 +71,7 @@ main {
 }
 
 h2 {
-    color: #4E342E;
+    color: #704214;
     margin-bottom: 1.5rem;
 }
 
@@ -85,37 +86,37 @@ h2 {
     background-color: #FFFFFF;
     border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 5px rgba(93, 64, 55, 0.2);
-    transition: transform 0.3s;
-    border: 1px solid #BCAAA4;
+    box-shadow: 0 2px 5px rgba(44, 24, 16, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #D4B08C;
 }
 
 .lesson-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
+    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.15);
 }
 
 .lesson-card h3 {
-    color: #4E342E;
+    color: #704214;
     margin-bottom: 1rem;
 }
 
 .phrase {
     margin: 1rem 0;
     padding: 0.8rem;
-    background-color: #EFEBE9;
+    background-color: #FAF3E0;
     border-radius: 5px;
-    border: 1px solid #BCAAA4;
+    border: 1px solid #D4B08C;
 }
 
 .hausa {
     font-weight: bold;
-    color: #5D4037;
+    color: #704214;
     margin-bottom: 0.3rem;
 }
 
 .english {
-    color: #6D4C41;
+    color: #4A2511;
     font-style: italic;
 }
 
@@ -150,18 +151,19 @@ h2 {
     justify-content: center;
     background-color: #FFFFFF;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(93, 64, 55, 0.2);
-    border: 1px solid #BCAAA4;
+    box-shadow: 0 2px 5px rgba(44, 24, 16, 0.1);
+    border: 1px solid #D4B08C;
 }
 
 .flashcard-back {
     transform: rotateY(180deg);
-    background-color: #D7CCC8;
+    background-color: #D4B08C;
+    color: #2C1810;
 }
 
 button {
-    background-color: #5D4037;
-    color: #EFEBE9;
+    background-color: #704214;
+    color: #FAF3E0;
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
@@ -171,17 +173,18 @@ button {
 }
 
 button:hover {
-    background-color: #6D4C41;
+    background-color: #8B5E34;
     transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(93, 64, 55, 0.3);
+    box-shadow: 0 2px 5px rgba(44, 24, 16, 0.2);
 }
 
 footer {
     text-align: center;
     padding: 2rem;
-    background-color: #5D4037;
-    color: #EFEBE9;
+    background-color: #704214;
+    color: #FAF3E0;
     margin-top: 3rem;
+    box-shadow: 0 -2px 4px rgba(44, 24, 16, 0.1);
 }
 
 @media (max-width: 768px) {
