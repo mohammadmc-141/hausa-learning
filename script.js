@@ -212,16 +212,126 @@ const quizQuestions = [
     }
 ];
 
+// Quiz state
 let currentQuestion = 0;
+let currentScore = 0;
+let bestScores = {
+    beginner: 0,
+    intermediate: 0,
+    advanced: 0
+};
+
+// Load best scores from localStorage if available
+const savedScores = localStorage.getItem('hausaQuizBestScores');
+if (savedScores) {
+    bestScores = JSON.parse(savedScores);
+    document.getElementById('best-score').textContent = bestScores[document.getElementById('difficulty').value];
+}
+
+// Quiz elements
 const quizContainer = document.querySelector('.quiz-container');
 const questionDiv = document.getElementById('quiz-question');
 const optionsDiv = document.getElementById('quiz-options');
 const checkButton = document.getElementById('check-answer');
 const nextButton = document.getElementById('next-question');
 const feedbackDiv = document.getElementById('quiz-feedback');
+const difficultySelect = document.getElementById('difficulty');
+const currentScoreSpan = document.getElementById('current-score');
+const totalQuestionsSpan = document.getElementById('total-questions');
+const currentQuestionSpan = document.getElementById('current-question');
+const totalQuestionsBottomSpan = document.getElementById('total-questions-bottom');
+const progressFill = document.getElementById('progress-fill');
 
+// Difficulty settings
+const difficultySettings = {
+    beginner: {
+        questionCount: 5,
+        timeLimit: 30, // seconds per question
+        categories: ['Greetings']
+    },
+    intermediate: {
+        questionCount: 10,
+        timeLimit: 20,
+        categories: ['Greetings', 'Numbers', 'Food and Drinks']
+    },
+    advanced: {
+        questionCount: 15,
+        timeLimit: 15,
+        categories: ['Greetings', 'Numbers', 'Food and Drinks', 'Time and Common Words']
+    }
+};
+
+let currentQuestions = [];
+let timer = null;
+let timeLeft = 0;
+
+// Filter questions by difficulty
+function filterQuestionsByDifficulty(difficulty) {
+    const settings = difficultySettings[difficulty];
+    const filteredQuestions = quizQuestions.filter(q => {
+        const category = q.category || 'Greetings'; // Default to Greetings if no category
+        return settings.categories.includes(category);
+    });
+    
+    // Shuffle and take required number of questions
+    return shuffleArray(filteredQuestions).slice(0, settings.questionCount);
+}
+
+// Shuffle array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+// Start timer
+function startTimer() {
+    const difficulty = difficultySelect.value;
+    timeLeft = difficultySettings[difficulty].timeLimit;
+    updateTimerDisplay();
+    
+    if (timer) clearInterval(timer);
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            checkAnswer(true); // Force check answer when time is up
+        }
+    }, 1000);
+}
+
+// Update timer display
+function updateTimerDisplay() {
+    const timerDisplay = document.querySelector('.timer-display') || document.createElement('div');
+    timerDisplay.className = 'timer-display';
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    
+    if (!document.querySelector('.timer-display')) {
+        questionDiv.insertBefore(timerDisplay, questionDiv.firstChild);
+    }
+    
+    if (timeLeft <= 5) {
+        timerDisplay.style.color = '#c62828';
+    } else {
+        timerDisplay.style.color = '#8b4513';
+    }
+}
+
+// Update progress
+function updateProgress() {
+    const progress = (currentQuestion / currentQuestions.length) * 100;
+    progressFill.style.width = `${progress}%`;
+    currentQuestionSpan.textContent = currentQuestion + 1;
+    totalQuestionsBottomSpan.textContent = currentQuestions.length;
+}
+
+// Display question
 function displayQuestion(index) {
-    const question = quizQuestions[index];
+    const question = currentQuestions[index];
     questionDiv.innerHTML = `<h3>${question.question}</h3>`;
     optionsDiv.innerHTML = '';
     
@@ -236,52 +346,147 @@ function displayQuestion(index) {
     checkButton.style.display = 'block';
     nextButton.style.display = 'none';
     feedbackDiv.textContent = '';
+    
+    startTimer();
+    updateProgress();
 }
 
+// Start quiz
+function startQuiz() {
+    currentQuestion = 0;
+    currentScore = 0;
+    const difficulty = difficultySelect.value;
+    currentQuestions = filterQuestionsByDifficulty(difficulty);
+    
+    currentScoreSpan.textContent = currentScore;
+    totalQuestionsSpan.textContent = currentQuestions.length;
+    
+    displayQuestion(currentQuestion);
+    updateProgress();
+}
+
+// Check answer
+function checkAnswer(timeUp = false) {
+    clearInterval(timer);
+    
+    const selectedOption = optionsDiv.querySelector('.selected');
+    if (!selectedOption && !timeUp) {
+        feedbackDiv.textContent = 'Please select an answer!';
+        return;
+    }
+    
+    const selectedIndex = timeUp ? -1 : Array.from(optionsDiv.children).indexOf(selectedOption);
+    const correct = selectedIndex === currentQuestions[currentQuestion].correct;
+    
+    if (correct) {
+        currentScore++;
+        currentScoreSpan.textContent = currentScore;
+        feedbackDiv.textContent = 'Correct! Well done!';
+        feedbackDiv.style.color = '#2e7d32';
+    } else {
+        feedbackDiv.textContent = timeUp ? 
+            'Time\'s up! ' : 
+            'Incorrect. ' + 
+            `The correct answer is: ${currentQuestions[currentQuestion].options[currentQuestions[currentQuestion].correct]}`;
+        feedbackDiv.style.color = '#c62828';
+    }
+    
+    // Update best score if needed
+    const difficulty = difficultySelect.value;
+    if (currentScore > bestScores[difficulty]) {
+        bestScores[difficulty] = currentScore;
+        localStorage.setItem('hausaQuizBestScores', JSON.stringify(bestScores));
+        document.getElementById('best-score').textContent = currentScore;
+    }
+    
+    checkButton.style.display = 'none';
+    nextButton.style.display = 'block';
+    nextButton.textContent = currentQuestion === currentQuestions.length - 1 ? 'Finish Quiz' : 'Next Question';
+}
+
+// Select option
 function selectOption(index) {
     const options = optionsDiv.querySelectorAll('.quiz-option');
     options.forEach(option => option.classList.remove('selected'));
     options[index].classList.add('selected');
 }
 
-checkButton.addEventListener('click', () => {
-    const selectedOption = optionsDiv.querySelector('.selected');
-    if (!selectedOption) {
-        feedbackDiv.textContent = 'Please select an answer!';
-        return;
-    }
-    
-    const selectedIndex = Array.from(optionsDiv.children).indexOf(selectedOption);
-    const correct = selectedIndex === quizQuestions[currentQuestion].correct;
-    
-    if (correct) {
-        feedbackDiv.textContent = 'Correct! Well done!';
-        feedbackDiv.style.color = '#2e7d32';
-    } else {
-        feedbackDiv.textContent = `Incorrect. The correct answer is: ${quizQuestions[currentQuestion].options[quizQuestions[currentQuestion].correct]}`;
-        feedbackDiv.style.color = '#c62828';
-    }
-    
-    checkButton.style.display = 'none';
-    nextButton.style.display = 'block';
-    nextButton.textContent = currentQuestion === quizQuestions.length - 1 ? 'Restart Quiz' : 'Next Question';
-});
+// Event listeners
+checkButton.addEventListener('click', () => checkAnswer());
 
 nextButton.addEventListener('click', () => {
-    if (nextButton.textContent === 'Start Quiz' || nextButton.textContent === 'Restart Quiz') {
-        currentQuestion = 0;
+    if (nextButton.textContent === 'Start Quiz' || nextButton.textContent === 'Finish Quiz') {
+        startQuiz();
     } else {
         currentQuestion++;
-    }
-    
-    if (currentQuestion < quizQuestions.length) {
-        displayQuestion(currentQuestion);
+        if (currentQuestion < currentQuestions.length) {
+            displayQuestion(currentQuestion);
+        }
     }
 });
 
-// Add some CSS for quiz options
+difficultySelect.addEventListener('change', () => {
+    document.getElementById('best-score').textContent = bestScores[difficultySelect.value];
+    if (nextButton.textContent !== 'Start Quiz') {
+        startQuiz();
+    }
+});
+
+// Add styles for new elements
 const style = document.createElement('style');
 style.textContent = `
+    .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background-color: #f5e6d3;
+        border-radius: 5px;
+    }
+    
+    .difficulty-selector select {
+        padding: 0.5rem;
+        border: 2px solid #8b4513;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #8b4513;
+        font-size: 1rem;
+    }
+    
+    .score-display {
+        text-align: right;
+        color: #8b4513;
+        font-weight: bold;
+    }
+    
+    .quiz-progress {
+        margin: 1rem 0;
+    }
+    
+    #progress-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #f5e6d3;
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+    }
+    
+    #progress-fill {
+        width: 0%;
+        height: 100%;
+        background-color: #8b4513;
+        border-radius: 5px;
+        transition: width 0.3s ease;
+    }
+    
+    .timer-display {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #8b4513;
+    }
+    
     .quiz-option {
         display: block;
         width: 100%;
@@ -304,15 +509,8 @@ style.textContent = `
         color: #8b4513;
         font-weight: bold;
     }
-    
-    #quiz-question h3 {
-        color: #8b4513;
-        margin-bottom: 1.5rem;
-    }
-    
-    #quiz-feedback {
-        margin-top: 1rem;
-        font-weight: bold;
-    }
 `;
 document.head.appendChild(style);
+
+// Start with beginner difficulty
+startQuiz();
