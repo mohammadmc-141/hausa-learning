@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Hausa Language</title>
-    <link rel="stylesheet" href="styles.css?v=2">
+    <title>Learn Hausa - Fun Learning Adventure!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
         <nav>
-            <h1>Learn Hausa</h1>
+            <div class="logo">
+                <h1>🌍 Hausa Adventure!</h1>
+            </div>
             <div class="nav-links">
-                <a href="#lessons">Lessons</a>
-                <a href="#vocabulary">Vocabulary</a>
-                <a href="#practice">Practice</a>
+                <div class="language-toggle">
+                    <button id="english-mode" class="language-btn active" type="button">🇬🇧 English</button>
+                    <button id="hausa-mode" class="language-btn" type="button">🇳🇬 Hausa</button>
+                </div>
+                <a href="#lessons">🎯 Lessons</a>
+                <a href="#vocabulary">📚 Words</a>
+                <a href="#practice">🎮 Practice</a>
             </div>
         </nav>
     </header>
@@ -25,90 +35,62 @@
         </section>
 
         <section id="lessons" class="lessons-section">
-            <h2>Basic Lessons</h2>
-            <div class="lesson-cards">
-                <div class="lesson-card">
-                    <h3>Lesson 1: Greetings</h3>
-                    <div class="phrase">
-                        <p class="hausa">Sannu!</p>
-                        <p class="english">Hello!</p>
+            <h2>Your Learning Adventure</h2>
+            <div class="learning-map">
+                <div class="island-path">
+                    <div class="lesson-island start">
+                        <div class="signpost">Start</div>
+                        <div class="island-decor"></div>
                     </div>
-                    <div class="phrase">
-                        <p class="hausa">Yaya kake/kike?</p>
-                        <p class="english">How are you?</p>
+                    
+                    <div class="lesson-island" data-lesson="1">
+                        <div class="signpost">Greetings</div>
+                        <div class="island-decor"></div>
                     </div>
-                    <div class="phrase">
-                        <p class="hausa">Lafiya lau</p>
-                        <p class="english">I'm fine</p>
+
+                    <div class="lesson-island" data-lesson="2">
+                        <div class="signpost">Numbers 1-10</div>
+                        <div class="island-decor"></div>
                     </div>
-                    <div class="phrase">
-                        <p class="hausa">Na gode</p>
-                        <p class="english">Thank you</p>
+
+                    <div class="lesson-island" data-lesson="3">
+                        <div class="signpost">Family Members</div>
+                        <div class="island-decor"></div>
                     </div>
-                </div>
-                <div class="lesson-card">
-                    <h3>Lesson 2: Numbers</h3>
-                    <div class="phrase">
-                        <p class="hausa">Daya</p>
-                        <p class="english">One</p>
+
+                    <div class="lesson-island" data-lesson="4">
+                        <div class="signpost">Colors</div>
+                        <div class="island-decor"></div>
                     </div>
-                    <div class="phrase">
-                        <p class="hausa">Biyu</p>
-                        <p class="english">Two</p>
+
+                    <div class="lesson-island" data-lesson="5">
+                        <div class="signpost">Basic Phrases</div>
+                        <div class="island-decor"></div>
                     </div>
-                    <div class="phrase">
-                        <p class="hausa">Uku</p>
-                        <p class="english">Three</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Hudu</p>
-                        <p class="english">Four</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Biyar</p>
-                        <p class="english">Five</p>
-                    </div>
-                </div>
-                <div class="lesson-card">
-                    <h3>Lesson 3: Common Phrases</h3>
-                    <div class="phrase">
-                        <p class="hausa">Ina kwana</p>
-                        <p class="english">Good morning</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Barka da yamma</p>
-                        <p class="english">Good evening</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Sai an jima</p>
-                        <p class="english">See you later</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Allah ya kiyaye</p>
-                        <p class="english">God protect you (goodbye)</p>
-                    </div>
-                </div>
-                <div class="lesson-card">
-                    <h3>Lesson 4: Food & Drinks</h3>
-                    <div class="phrase">
-                        <p class="hausa">Abinci</p>
-                        <p class="english">Food</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Ruwa</p>
-                        <p class="english">Water</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Shinkafa</p>
-                        <p class="english">Rice</p>
-                    </div>
-                    <div class="phrase">
-                        <p class="hausa">Nama</p>
-                        <p class="english">Meat</p>
+
+                    <div class="lesson-island finish">
+                        <div class="signpost">Finish</div>
+                        <div class="island-decor"></div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <div id="lesson-viewer" class="lesson-viewer hidden">
+            <div class="lesson-header">
+                <button id="back-to-lessons" class="back-button">← Back to Lessons</button>
+                <h3 id="current-lesson-title"></h3>
+            </div>
+            <div id="lesson-content" class="lesson-content">
+                <!-- Lesson content will be loaded here -->
+            </div>
+            <div class="lesson-navigation">
+                <button id="prev-slide" class="nav-button">Previous</button>
+                <span id="slide-counter">1/4</span>
+                <button id="next-slide" class="nav-button">Next</button>
+                <button id="complete-lesson" class="complete-button hidden">Complete Lesson ✅</button>
+            </div>
+        </div>
 
         <section id="vocabulary" class="vocabulary-section">
             <h2>Vocabulary Practice</h2>
@@ -133,11 +115,8 @@
             </div>
         </section>
     </main>
-
     <footer>
         <p> 2024 Learn Hausa - Educational Website</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
