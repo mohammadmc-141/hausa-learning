@@ -261,13 +261,24 @@ function showLockedMessage() {
 // Function to start a lesson
 function startLesson(lessonId) {
     currentLessonId = parseInt(lessonId);
+    const lesson = lessonData[currentLessonId];
     const lessonViewer = document.getElementById('lesson-viewer');
     const completeButton = document.getElementById('complete-lesson');
     const backButton = document.getElementById('back-to-lessons');
     const prevButton = document.getElementById('prev-slide');
     const nextButton = document.getElementById('next-slide');
+    const currentLessonTitle = document.getElementById('current-lesson-title');
     
-    completeButton.style.display = 'none'; // Hide complete button initially
+    if (!lesson) {
+        console.error('Lesson not found:', lessonId);
+        return;
+    }
+    
+    // Update lesson title
+    currentLessonTitle.textContent = lesson.title[currentLanguage];
+    
+    // Hide complete button initially
+    completeButton.style.display = 'none';
     
     // Show lesson viewer
     lessonViewer.classList.remove('hidden');
@@ -289,7 +300,7 @@ function startLesson(lessonId) {
     };
     
     nextButton.onclick = () => {
-        const totalSlides = lessonData[currentLessonId].slides.length;
+        const totalSlides = lesson.slides.length;
         if (currentSlide < totalSlides - 1) {
             showSlide(currentSlide + 1);
         }
@@ -297,13 +308,12 @@ function startLesson(lessonId) {
 }
 
 function showSlide(slideIndex) {
-    const slides = document.querySelectorAll('.lesson-slide');
-    const completeButton = document.getElementById('complete-lesson');
-    const prevButton = document.getElementById('prev-slide');
-    const nextButton = document.getElementById('next-slide');
     const lesson = lessonData[currentLessonId];
     const lessonContent = document.getElementById('lesson-content');
     const slideCounter = document.getElementById('slide-counter');
+    const prevButton = document.getElementById('prev-slide');
+    const nextButton = document.getElementById('next-slide');
+    const completeButton = document.getElementById('complete-lesson');
     const totalSlides = lesson.slides.length;
     
     // Update slide content
