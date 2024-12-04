@@ -391,21 +391,19 @@ footer {
 }
 
 /* Lesson Viewer Styles */
-.lesson-viewer {
+#lesson-viewer {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #f5e6d3;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    transition: opacity 0.3s ease;
 }
 
 .lesson-viewer.hidden {
@@ -416,160 +414,131 @@ footer {
 }
 
 .lesson-header {
+    padding: 20px;
     display: flex;
     align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 20px;
 }
 
-.back-button {
-    padding: 0.5rem 1rem;
-    border: none;
-    background: var(--accent-color);
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    font-family: var(--font-family);
-    font-size: 1rem;
-}
-
-.back-button:hover {
-    background: var(--accent-hover);
-}
-
-.lesson-content {
+#lesson-content {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: calc(100vh - 160px); /* Account for header and navigation */
+    overflow: hidden;
+}
+
+.lesson-slide {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 1rem 0;
-}
-
-.slide-content {
+    padding: 40px;
+    box-sizing: border-box;
     text-align: center;
 }
 
-.hausa-text {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
+.lesson-slide h2 {
+    font-size: 4em;
+    color: #333;
+    margin-bottom: 40px;
 }
 
-.english-text {
-    font-size: 1.8rem;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.usage-note {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    font-style: italic;
+.lesson-slide p {
+    font-size: 2.5em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #444;
 }
 
 .lesson-navigation {
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
-.nav-button {
-    padding: 0.5rem 1rem;
+#slide-counter {
+    font-size: 1.4em;
+    margin: 0 20px;
+    color: #666;
+}
+
+.navigation-buttons button,
+#back-to-lessons,
+#prev-slide,
+#next-slide {
+    font-size: 1.2em;
+    padding: 12px 24px;
+    border-radius: 8px;
     border: none;
-    background: var(--accent-color);
+    background-color: #4a90e2;
     color: white;
-    border-radius: 20px;
     cursor: pointer;
-    font-family: var(--font-family);
-    font-size: 1rem;
+    transition: background-color 0.3s ease;
 }
 
-.nav-button:disabled {
-    opacity: 0.5;
+.navigation-buttons button:hover,
+#back-to-lessons:hover,
+#prev-slide:hover,
+#next-slide:hover {
+    background-color: #357abd;
+}
+
+.navigation-buttons button:disabled,
+#prev-slide:disabled,
+#next-slide:disabled {
+    background-color: #ccc;
     cursor: not-allowed;
 }
 
-.nav-button:not(:disabled):hover {
-    background: var(--accent-hover);
-}
-
-.complete-button {
-    padding: 0.75rem 1.5rem;
+#complete-lesson {
+    font-size: 1.6em;
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    background: var(--village-green);
-    color: white;
-    border-radius: 20px;
+    border-radius: 8px;
     cursor: pointer;
-    font-family: var(--font-family);
-    font-size: 1.1rem;
-    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
-.complete-button:hover {
-    filter: brightness(1.1);
+#complete-lesson:hover {
+    background-color: #45a049;
 }
 
-.completion-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--village-green);
+.back-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 8px;
+    background-color: #4a90e2;
     color: white;
-    padding: 2rem 4rem;
-    border-radius: 25px;
-    font-family: 'Sniglet', cursive;
-    font-size: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    animation: popIn 0.5s ease, fadeOut 0.5s ease 2.5s;
-    z-index: 2000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-@keyframes popIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
+.back-button:hover {
+    background-color: #357abd;
 }
 
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+#current-lesson-title {
+    font-size: 2em;
+    margin: 0;
+    color: #333;
 }
 
 /* Responsive styles for lesson viewer */
 @media (max-width: 768px) {
-    .lesson-viewer {
+    #lesson-viewer {
         width: 95%;
         height: 95vh;
         padding: 1rem;
@@ -585,11 +554,11 @@ footer {
         font-size: 1.5rem;
     }
 
-    .slide-content h2 {
+    .lesson-slide h2 {
         font-size: 2rem;
     }
 
-    .slide-content p {
+    .lesson-slide p {
         font-size: 1.2rem;
     }
 
@@ -666,4 +635,55 @@ footer {
 
 #complete-lesson:hover {
     background-color: #45a049;
+}
+
+.completion-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--village-green);
+    color: white;
+    padding: 2rem 4rem;
+    border-radius: 25px;
+    font-family: 'Sniglet', cursive;
+    font-size: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: popIn 0.5s ease, fadeOut 0.5s ease 2.5s;
+    z-index: 2000;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
